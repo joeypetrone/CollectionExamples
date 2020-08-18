@@ -34,8 +34,16 @@ namespace CollectionExamples
                 Console.WriteLine($"{person} is in evening cohort 11.");
             }
 
+            //is the iten in the list?
+            var steveIsInE11 = evening11.Contains("Steve");
 
+            //ternary inside interpolated strings have to be in parantheses
+            Console.WriteLine($"Steve is {(steveIsInE11 ? "" : "not ")}in E11.");
 
+            //just the first match
+            var matchingPerson = evening11.Find(person => person.StartsWith("J"));
+
+            Console.WriteLine($"{matchingPerson} starts with J.");
         }
     }
 }
