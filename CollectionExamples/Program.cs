@@ -60,7 +60,23 @@ namespace CollectionExamples
             words.Add("scrupulous", "diligent, thorough, extremely attentive to details");
 
             //keys must be unique, this won't work
-            words.Add("congratulate", "not a real thing");
+            //words.Add("congratulate", "not a real thing");
+
+            //validate uniqueness so you don't get an exception
+            if (words.ContainsKey("congratulate"))
+            {
+                words["congratulate"] = "adsfasdf";
+            }
+            else
+            {
+                words.Add("congratulate", "asdfasdf");
+            }
+
+            //same as above, just some different syntax
+            if (!words.TryAdd("congratulate", "asdfasdf"))
+            {
+                words["congratulate"] = "adsfasdf";
+            }
 
             Console.WriteLine($"The fake definition of Congratulations is {words["congratulate"]}");
 
@@ -79,14 +95,54 @@ namespace CollectionExamples
                 Console.WriteLine($"The fake definition of {word} is {definition}");
             }
 
-            var wordsWithMultipleDefinitions = new Dictionary<string, List<string>>();
-
-            wordsWithMultipleDefinitions.Add("Scrupulous", new List<string>() 
+            var wordsWithMultipleDefinitions = new Dictionary<string, List<string>>
             {
-                "Diligent", 
-                "Thorough",
-                "Extremely attentive to detail"
-            });
+                {
+                    "Scrupulous",
+                    new List<string> {"Diligent", "Thorough", "Extremely attentive to detail" }
+                }
+            };
+
+            //won't work
+            //wordsWithMultipleDefinitions.Add("Scrupulous", new List<string>() 
+            //{
+            //    "Diligent", 
+            //    "Thorough",
+            //    "Extremely attentive to detail"
+            //});
+
+            foreach (var (word, definitions) in wordsWithMultipleDefinitions)
+            {
+                Console.WriteLine($"{word} is defined as :");
+                foreach (var definition in definitions)
+                {
+                    Console.WriteLine($"    {definition}");
+                }
+            }
+
+            //queue reads first item first
+            var queue = new Queue<string>();
+
+            queue.Enqueue("this is first");
+            queue.Enqueue("Second");
+            queue.Enqueue("third");
+
+            foreach(var item in queue)
+            {
+                Console.WriteLine(item);
+            }
+
+            //stack reads last item first
+            var stack = new Stack<string>();
+
+            stack.Push("third");
+            stack.Push("Second");
+            stack.Push("this is first");
+
+            foreach (var item in stack)
+            {
+                Console.WriteLine(item);
+            }
 
 
         }
