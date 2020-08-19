@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CollectionExamples.LinqStuff;
+using System;
 using System.Collections.Generic;
 
 namespace CollectionExamples
@@ -7,6 +8,9 @@ namespace CollectionExamples
     {
         static void Main(string[] args)
         {
+            var example = new Example();
+            example.Run();
+
             //Lists are a general purpose collection that is pretty good at everything
             var instructors = new List<string>();
             var students = new List<string>();
@@ -18,6 +22,12 @@ namespace CollectionExamples
             instructors.Add("Jameka");
             instructors.Add("Nathan");
             instructors.Add("Dylan");
+
+            //foreach (var instructor in instructors)
+            //{
+            //    //this will blow up with an invalid operation exception, collections can't be modified while being iterated
+            //    instructors.Add("asdf");
+            //}
 
             //items need to be of the right type
             numbers.Add(1);
@@ -95,6 +105,7 @@ namespace CollectionExamples
                 Console.WriteLine($"The fake definition of {word} is {definition}");
             }
 
+            //using the collection initiallizer
             var wordsWithMultipleDefinitions = new Dictionary<string, List<string>>
             {
                 {
@@ -103,7 +114,7 @@ namespace CollectionExamples
                 }
             };
 
-            //won't work
+            //won't work if you use the collection initializer for "Scrupulous"
             //wordsWithMultipleDefinitions.Add("Scrupulous", new List<string>() 
             //{
             //    "Diligent", 
@@ -114,6 +125,7 @@ namespace CollectionExamples
             foreach (var (word, definitions) in wordsWithMultipleDefinitions)
             {
                 Console.WriteLine($"{word} is defined as :");
+                definitions.Add("poop");
                 foreach (var definition in definitions)
                 {
                     Console.WriteLine($"    {definition}");
@@ -143,6 +155,8 @@ namespace CollectionExamples
             {
                 Console.WriteLine(item);
             }
+
+            //Language Integrated Query (LINQ)
 
 
         }
